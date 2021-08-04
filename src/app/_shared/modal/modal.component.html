@@ -1,0 +1,24 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel"> <strong>Register to Sell a House</strong></h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
+</div>
+<div class="modal-body">
+    <p>
+        You have to be registered to list a property
+    </p>
+    <p>
+        <strong>Login</strong>  if you have an account or <strong>Register</strong> if
+        you do not have one.
+    </p> 
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" [routerLink]="['/register']" (click)="modalRef.close()">
+        Register
+    </button>
+    <button type="button" class="btn btn-primary" [routerLink]="['/login']" (click)="modalRef.close()">
+        Login
+    </button>
+    <button type="button" class="btn btn-danger" (click)="modalRef.close()">
+        Close
+    </button>
+</div>

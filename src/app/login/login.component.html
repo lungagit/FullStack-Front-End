@@ -1,0 +1,54 @@
+<app-auth-header></app-auth-header>
+<!-- Login form -->
+<div class="col-md-6 offset-md-3 mt-5">
+    <div class="card">
+        <h4 class="card-header" style="text-align: center;">Sign in</h4>
+        <div class="card-body">
+            <form [formGroup]="loginForm"
+                  (ngSubmit)="onLogin()"
+                  novalidate>
+
+                <!-- Email input -->
+                <div class="form-floating mb-4">
+                    <input type="email" 
+                           id="email"
+                           name="email"
+                           formControlName="email"
+                           placeholder="name@example.com" 
+                           class="form-control"
+                           [ngClass]="{'is-invalid': displayMessage.email }"/>
+                    <label class="form-label" for="email">Email address</label>
+                </div>
+            
+                <!-- Password input -->
+                <div class="form-floating mb-4">
+                    <input type="password" 
+                           id="password"
+                           name="password"
+                           placeholder="password"  
+                           class="form-control"
+                           formControlName="password"
+                           [ngClass]="{'is-invalid': displayMessage.password }" />
+                    <label class="form-label" for="password">Password</label>
+                </div>
+                <div class="alert alert-danger" *ngIf="invalid">
+                    {{error}}
+                </div>
+
+                <!-- Submit button -->
+                <button type="submit" [disabled]="loading" class="btn btn-primary btn-block">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Sign in
+                </button>
+                <div class="text-center" style="padding: 20px;">
+                    <p>Don't have an account? <a [routerLink]="['/register']">Register here</a></p>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+</div>
+<!-- Login form -->
+
+<!-- Footer -->
+<app-footer id="footer"></app-footer>
