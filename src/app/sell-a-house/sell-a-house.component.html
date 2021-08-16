@@ -1,0 +1,136 @@
+<app-header></app-header>
+<main style="margin-top: 58px">
+    <div class="container pt-4">
+        <div class="col-md-8 offset-md-2 mt-5">
+        <div class="card">
+            <h4 class="card-header" style="text-align: center;">{{title}}</h4>
+                <div class="card-body">
+                    <form novalidate 
+                          (ngSubmit)="onSubmit()"
+                          [formGroup]="createAdvertForm">
+                        <!-- Headline -->
+                        <div class="form-floating mb-4">
+                            <input type="text" 
+                                   id="headline" 
+                                   name="headline" 
+                                   placeholder="Headline" 
+                                   class="form-control"
+                                   formControlName="headline" 
+                                   [ngClass]="{'is-invalid': displayMessage.headline }" />
+                            <label class="form-label" for="headline">Headline</label>
+                            <span>
+                                <span class="small">
+                                    <small> Min 10 characters, max 100 characters</small>
+                                </span>
+                            </span>
+                        </div>
+            
+                        <!-- Province -->
+                        <div class="form-floating mb-4">
+                            <select type="text" 
+                                    id="province" 
+                                    placeholder="Province" 
+                                    class="form-control"
+                                    formControlName="province"
+                                    (ngModelChange)="onSelcetedProvince($event)" 
+                                    name="province" 
+                                    [ngClass]="{'is-invalid': displayMessage.province }"> 
+                                <option *ngFor="let province of provinces"
+                                        [ngValue]="province"
+                                        >
+                                    {{province.name}}
+                                </option>
+                            </select>
+                            <label class="form-label" for="province">Province</label>
+                            <span>
+                                <span class="small">
+                                    <small> Select a province</small>
+                                </span>
+                            </span>
+                        </div>
+            
+                        <!-- City -->
+                        <div class="form-floating mb-4">
+                            <select type="text" 
+                                   id="city" 
+                                   name="city" 
+                                   placeholder="City" 
+                                   class="form-control" 
+                                   formControlName="city"
+                                   (ngModelChange)="onSelcetedCity($event)"
+                                   [ngClass]="{'is-invalid': displayMessage.city}" >
+                                <option *ngFor="let city of cities"
+                                        [ngValue]="this.city">
+                                    {{city.name}}
+                                </option>
+                            </select>
+                            <label class="form-label" for="city">City</label>
+                            <span>
+                                <span class="small">
+                                    <small> Select a Province then select a City</small>
+                                </span>
+                            </span>
+                        </div>
+            
+                        <div class="form-fixed mb-4">
+                            <textarea type="text"
+                                      mdbInput 
+                                      id="advertDetails" 
+                                      name="advertDetails"
+                                      rows="4"
+                                      placeholder="Advert Details"
+                                      class="form-control" 
+                                      formControlName="advertDetails"
+                                      [ngClass]="{'is-invalid': displayMessage.advertDetails}" >
+                            </textarea>
+                            <label class="form-label" for="advertDetails"></label>
+                            <span>
+                                <span class="small">
+                                    <small> Min 10 characters, max 1000 characters</small>
+                                </span>
+                            </span>
+                        </div>
+            
+                        <!-- Price -->
+                        <div class="form-floating mb-4">
+                            <input type="number" 
+                                   id="price" 
+                                   name="price" 
+                                   placeholder="City" 
+                                   class="form-control"
+                                   formControlName="price" 
+                                   [ngClass]="{'is-invalid': displayMessage.price}" />
+                            <label class="form-label" for="price">Price</label>
+                            <span>
+                                <span class="small">
+                                    <small> Min 10 000 characters, max 100 000 000</small>
+                                </span>
+                            </span>
+                        </div>
+            
+                        <div class="alert alert-danger" *ngIf="invalid">
+                            Fill in all fields
+                        </div>
+            
+                        <!-- Cancel button -->
+                        <button type="button" 
+                                class="btn btn-danger" 
+                                (click)="onCancel()">
+                            Cancel
+                        </button>
+            
+                        <!-- Submit button -->
+                        <button type="submit" 
+                                [disabled]="loading" 
+                                class="btn btn-primary">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                            Publish Advert
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+

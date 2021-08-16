@@ -11,7 +11,7 @@ import { AlertService } from 'src/app/_services/alert.service';
 })
 export class AlertComponent implements OnInit, OnDestroy {
 
-@Input() id = 'default-alert';
+    @Input() id = 'default-alert';
     @Input() fade = true;
 
     alerts: Alert[] = [];

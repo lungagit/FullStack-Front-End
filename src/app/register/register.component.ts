@@ -132,6 +132,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             .subscribe(
                 data => {
                    this.alertService.success('Registration successful. Login', { keepAfterRouteChange: true });
+                   localStorage.setItem('currentUser', JSON.stringify(this.user));
                    this.router.navigate(['/login']);
                 },
                 error => {

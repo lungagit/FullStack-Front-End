@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~mdb-ui-kit/css/mdb.min.css";
+@import "~mdb-angular-ui-kit/assets/scss/mdb.scss";
 
 body {
   background-color: #fbfbfb;
@@ -9,4 +10,13 @@ body {
     padding-left: 240px;
   }
 }
-@import '~mdb-angular-ui-kit/assets/scss/mdb.scss';
+h4 {
+  color: rgb(36, 160, 237);
+}
+
+// .sapMInputBaseDisabled .sapMInputBaseInner::-webkit-input-placeholder {
+//   opacity: 100;
+// }
+// .sapMInputBaseReadonly .sapMInputBaseInner::-webkit-input-placeholder {
+//   opacity: 100;
+// }

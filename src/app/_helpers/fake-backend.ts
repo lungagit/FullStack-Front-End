@@ -5,6 +5,7 @@ import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 
 // array in local storage for registered users
 let users = JSON.parse(localStorage.getItem('users')) || [];
+let adverts = JSON.parse(localStorage.getItem('adverts')) || [];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -32,6 +33,17 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return updateUser();
                 case url.match(/\/users\/\d+$/) && method === 'DELETE':
                     return deleteUser();
+
+                case url.match('/adverts/create-advert') && method === 'POST':
+                    return createAdvert();
+                case url.endsWith('/adverts') && method === 'GET':
+                    return getAdverts();
+                case url.match(/\/adverts\/\d+$/) && method === 'GET':
+                    return getAdvertById();
+                case url.match(/\/adverts\/\d+$/) && method === 'PUT':
+                    return updateAdvert();
+                case url.match(/\/adverts\/\d+$/) && method === 'DELETE':
+                    return deleteAdvert();
                 default:
                     // pass through any requests not handled above
                     return next.handle(request);
@@ -102,6 +114,43 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             return ok();
         }
 
+        function getAdverts() {
+            if (!isLoggedIn()) return unauthorized();
+            return ok(adverts);
+        }
+
+        function getAdvertById() {
+
+            const advert = adverts.find(x => x.id === idFromUrl());
+            return ok(advert);
+        }
+        function createAdvert() {
+            const advert = body              
+            advert.id = adverts.length ? Math.max(...adverts.map(x => x.id)) + 1 : 1;
+            adverts.push(advert);
+            localStorage.setItem('adverts', JSON.stringify(adverts));
+            return ok();
+        }
+
+        function updateAdvert() {
+            if (!isLoggedIn()) return unauthorized();
+
+            let params = body;
+            let advert = adverts.find(x => x.id === idFromUrl());
+
+            // update and save advert
+            Object.assign(advert, params);
+            localStorage.setItem('adverts', JSON.stringify(adverts));
+
+            return ok();
+        }
+
+        function deleteAdvert() {
+
+            adverts = adverts.filter(x => x.id !== idFromUrl());
+            localStorage.setItem('adverts', JSON.stringify(adverts));
+            return ok();
+        }
         // helper functions
 
         function ok(body?) {

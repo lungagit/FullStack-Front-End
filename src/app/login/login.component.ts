@@ -1,11 +1,11 @@
 import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControlName  } from '@angular/forms';
 import { GenericValidator } from '../_shared/generic-validator';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Observable, fromEvent, merge } from 'rxjs';
-import { debounce, debounceTime, first } from 'rxjs/operators';
+import { debounceTime, first } from 'rxjs/operators';
 import { AuthenticationService } from '../_services';
-import { AlertService } from '../_services/alert.service';
+
 
 @Component({
   selector: 'app-login',
@@ -26,9 +26,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private validationMessages: { [key: string]: { [key: string]: string } };
 
     constructor(private router: Router,
-                private route: ActivatedRoute,
                 private fb: FormBuilder,
-                private alertService: AlertService,
                 private authenticationService: AuthenticationService) {
         
         this.validationMessages = {
@@ -62,8 +60,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
     }
 
     onLogin(): void{
-        // reset alerts on submit
-        this.alertService.clear()
 
         let email = this.loginForm.get('email')?.value;
         let password = this.loginForm.get('password')?.value;
@@ -75,7 +71,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
                     
                 },
                 error => {
-                    //this.alertService.error(error);
                     this.error = error;
                     this.invalid = true;
                     this.loading = false;

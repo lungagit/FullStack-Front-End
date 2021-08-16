@@ -1,9 +1,72 @@
 <app-header></app-header>
 <main style="margin-top: 58px">
     <div class="container pt-4">
-        <p>My-Adverts works!!</p>
+        <div><h4 style="text-align: center;">My Adverts</h4></div>
+        <app-alert></app-alert>
+        <div class="d-flex justify-content-center" *ngIf="showloader && !adverts.length">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center" *ngIf="!showloader && !adverts.length">
+            <div >
+                <h5 style="text-align: center;">You do not have any adverts yet.</h5>
+                <h6 style="text-align: center;">Click <a [routerLink]="['/sell-a-house']">here</a> to add adverts.</h6>
+            </div>
+        </div>
+
+        <table class="table table-striped" *ngIf="adverts && adverts.length">
+            <thead>
+                <tr>
+                    <th style="width: 20%"><strong>HEADLINE</strong></th>
+                    <th style="width: 20%"><strong>PROVINCE</strong></th>
+                    <th style="width: 20%"><strong>CITY</strong></th>
+                    <th style="width: 20%"><strong>PRICE</strong></th>
+                    <th style="width: 12%"><strong>STATUS</strong></th>
+                    <th style="width: 8%"><strong>ACTION</strong></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let advert of adverts">
+                    <td *ngIf="!advert.deleted">{{advert.headline}}</td>
+                    <td *ngIf="!advert.deleted">{{advert.province}}</td>
+                    <td *ngIf="!advert.deleted">{{advert.city}}</td>
+                    <td *ngIf="!advert.deleted">{{advert.price | currency:"R":"symbol":"1.2-2"}}</td>
+                    <td *ngIf="advert.hidden && !advert.deleted">
+                        <h6>
+                            <span class="badge bg-warning text-dark">
+                                {{advert.status}}
+                            </span>
+                        </h6>
+                    </td>
+                    <td *ngIf="!advert.hidden && !advert.deleted">
+                        <h6>
+                            <span class="badge bg-success">
+                                {{advert.status}}
+                            </span>
+                        </h6>
+                    </td>
+                    <td *ngIf="!advert.deleted">
+                        <div mdbDropdown class="dropdown">
+                            <button mdbDropdownToggle class="btn btn-primary dropdown-toggle" type="button" aria-expanded="false">
+                                Action
+                            </button>
+                            <ul mdbDropdownMenu class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" routerLink="/sell-a-house/{{advert.id}}/edit">Edit Advert</a></li>
+                                <li *ngIf="!advert.hidden"><a class="dropdown-item" (click)="onHideAdvert(advert.id)">Hide Advert</a></li>
+                                <li *ngIf="advert.hidden"><a class="dropdown-item" (click)="onShowAdvert(advert.id)">Show Advert</a></li>
+                                <li><a class="dropdown-item" style="color: red;" (click)="openModal(advert.id)">Delete Advert</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <tr *ngIf="!adverts">
+                    <td colspan="4" class="text-center">
+                        <span class="spinner-border spinner-border-lg align-center"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </main>
-
-
-

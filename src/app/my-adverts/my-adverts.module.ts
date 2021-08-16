@@ -9,6 +9,25 @@ import { HeaderComponent } from '../header/header.component';
 import { AuthGuard } from '../_helpers/auth.guard';
 import { FooterComponent } from '../footer/footer.component';
 import { AuthHeaderComponent } from '../_shared/auth-header/auth-header.component';
+import { SellAHouseComponent } from '../sell-a-house/sell-a-house.component';
+import { BuyAHouseComponent } from '../buy-a-house/buy-a-house.component';
+import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
+import { MdbCheckboxModule } from 'mdb-angular-ui-kit/checkbox';
+import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
+import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
+import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
+import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
+import { MdbPopoverModule } from 'mdb-angular-ui-kit/popover';
+import { MdbRadioModule } from 'mdb-angular-ui-kit/radio';
+import { MdbRangeModule } from 'mdb-angular-ui-kit/range';
+import { MdbRippleModule } from 'mdb-angular-ui-kit/ripple';
+import { MdbScrollspyModule } from 'mdb-angular-ui-kit/scrollspy';
+import { MdbTabsModule } from 'mdb-angular-ui-kit/tabs';
+import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
+import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
+import { DeleteModalComponent } from '../_shared/delete-modal/delete-modal.component';
+import { AlertComponent } from '../_shared/alert/alert.component';
+
 
 @NgModule({
   declarations: [
@@ -18,6 +37,11 @@ import { AuthHeaderComponent } from '../_shared/auth-header/auth-header.componen
     HeaderComponent,
     FooterComponent,
     AuthHeaderComponent,
+    SellAHouseComponent,
+    BuyAHouseComponent,
+    DeleteModalComponent,
+    AlertComponent
+
   ],
   imports: [
     CommonModule,
@@ -26,8 +50,26 @@ import { AuthHeaderComponent } from '../_shared/auth-header/auth-header.componen
     RouterModule.forChild([
       {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterComponent},
-      {path: 'my-adverts', component: MyAdvertsComponent, canActivate: [AuthGuard]}
+      {path: 'my-adverts', component: MyAdvertsComponent, canActivate: [AuthGuard]},
+      {path: 'sell-a-house', component: SellAHouseComponent, canActivate: [AuthGuard]},
+      {path: 'sell-a-house/:id/edit', component: SellAHouseComponent, canActivate: [AuthGuard]},
+      {path: 'buy-a-house', component: BuyAHouseComponent, canActivate: [AuthGuard]},
+
     ]),
+    MdbCarouselModule,
+    MdbCheckboxModule,
+    MdbCollapseModule,
+    MdbDropdownModule,
+    MdbFormsModule,
+    MdbModalModule,
+    MdbPopoverModule,
+    MdbRadioModule,
+    MdbRangeModule,
+    MdbRippleModule,
+    MdbScrollspyModule,
+    MdbTabsModule,
+    MdbTooltipModule,
+    MdbValidationModule,
   ]
 })
 export class MyAdvertsModule { }

@@ -27,7 +27,6 @@ import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeHeaderComponent } from './_shared/home-header/home-header.component';
-import { AlertComponent } from './_shared/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -36,8 +35,8 @@ import { AlertComponent } from './_shared/alert/alert.component';
     HomesForSaleComponent,
     ModalComponent,
     HomeHeaderComponent,
-    AlertComponent
 
+    
   ],
   imports: [
     BrowserModule,

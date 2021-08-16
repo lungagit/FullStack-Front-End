@@ -7,32 +7,43 @@
                 <a class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
                     <i class="fas fa-tachometer-alt fa-fw me-3"></i><span><strong>User</strong></span>
                 </a>
-                <a [routerLink]="['/my-adverts']" class="list-group-item list-group-item-action py-2 ripple active">
+                <a class="list-group-item list-group-item-action py-2 ripple"  
+                   routerLinkActive="active" 
+                   [routerLink]="['/my-adverts']">
                     <i class="fas fa-chart-bar fa-fw me-3"></i><span>My Adverts</span>
                 </a>
                 <a class="list-group-item list-group-item-action py-2 ripple">
                     <i class="fas fa-user fa-fw me-3"></i><span>My Profile</span></a> 
-                <a class="list-group-item list-group-item-action py-2 ripple">
+                <a class="list-group-item list-group-item-action py-2 ripple" 
+                   routerLinkActive="active" 
+                   [routerLink]="['/buy-a-house']">
                     <i class="fas fa-money-bill-alt fa-fw me-3"></i><span>Buy a House</span></a>                        
-                <a class="list-group-item list-group-item-action py-2 ripple">
+                <a class="list-group-item list-group-item-action py-2 ripple" 
+                   routerLinkActive="active"  
+                   [routerLink]="['/sell-a-house']">
                     <i class="fas fa-briefcase fa-fw me-3"></i><span>Sell a House</span>
                 </a>
-                <a class="list-group-item list-group-item-action py-2 ripple">
+                <a class="list-group-item list-group-item-action py-2 ripple"
+                   routerLinkActive="active">
                     <i class="fas fa-wrench fa-fw me-3"></i><span>Manage Account</span></a>
 
-                <a class="list-group-item list-group-item-action py-2 ripple">
+                <a class="list-group-item list-group-item-action py-2 ripple"
+                   routerLinkActive="active">
                     <i class="fas fa-id-card fa-fw me-3"></i><span>My Seller Profile</span></a>                        
-                <a class="list-group-item list-group-item-action py-2 ripple">
+                <a class="list-group-item list-group-item-action py-2 ripple"
+                   routerLinkActive="active">
                     <i class="fas fa-star fa-fw me-3"></i><span>Favorite Houses</span></a>
             </div>
             <div class="list-group list-group-flush mx-3 mt-4">
                 <a class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
                     <i class="fas fa-tachometer-alt fa-fw me-3"></i><span><strong>Administrator</strong></span>
                 </a>
-                <a class="list-group-item list-group-item-action py-2 ripple">
+                <a class="list-group-item list-group-item-action py-2 ripple"
+                   routerLinkActive="active">
                     <i class="fas fa-users-cog fa-fw me-3"></i><span>User Management</span>
                 </a>
-                <a class="list-group-item list-group-item-action py-2 ripple">
+                <a class="list-group-item list-group-item-action py-2 ripple"
+                   routerLinkActive="active">
                     <i class="fas fa-wrench fa-fw me-3"></i>
                     <span>Advert Management</span>
                 </a>
@@ -64,6 +75,9 @@
 
             <!-- Right links -->
             <ul class="navbar-nav ms-auto d-flex flex-row">
+                <a class="navbar-brand" >
+                    <strong>{{username}}</strong>
+                </a>
                 <!-- Notification dropdown -->
                 <li class="nav-item dropdown">
                     <button type="button" class="btn btn-outline-grey btn-sm m-1" (click)="onLogout()">
