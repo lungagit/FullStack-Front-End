@@ -1,0 +1,67 @@
+
+<div class="card">
+    <div class="card-header">
+        <h4 style="text-align: center;">Properties</h4>
+    </div>
+    <div class="d-flex justify-content-center" *ngIf="showloader && !adverts.length">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    
+    <div class="d-flex justify-content-center" *ngIf="!showloader && !adverts.length">
+        <div>
+            <h5 style="text-align: center;">There are no adverts to show yet.</h5>
+        </div>
+    </div>
+    <div class="card-body" *ngIf="adverts && adverts.length">
+        <div class="row" >
+            <div class="col-md-4">
+                <form class="d-none d-md-flex input-group">
+                    <input autocomplete="off" type="search" class="form-control rounded"
+                        placeholder='Search (ctrl + "/" to focus) - (Section 5)' />
+                    <span class="input-group-text border-0"><i class="fas fa-search"></i></span>
+                </form>
+            </div>
+        </div>
+        <div mdbDropdown class="dropdown">
+            <button mdbDropdownToggle class="btn btn-primary dropdown-toggle" type="button" aria-expanded="false">
+                Order by
+            </button>
+            <ul mdbDropdownMenu class="dropdown-menu">
+                <li><a class="dropdown-item" (click)="orderByHighPrice()">Price: High to Low</a></li>
+                <li><a class="dropdown-item" (click)="orderByLowPrice()">Price: Low to High</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover" *ngIf="adverts && adverts.length">
+                <thead>
+                    <tr>
+                        <th style="width: 40%"><strong>HEADLINE</strong></th>
+                        <th style="width: 40%"><strong>LOCATION</strong></th>
+                        <th style="width: 20%"><strong>PRICE</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let advert of adverts">
+                        <td *ngIf="!advert.deleted && !advert.hidden">
+                            <a [routerLink]="['/buy-a-house', advert.id]">
+                                {{advert.headline}}
+                            </a>
+                        </td>
+                        <td *ngIf="!advert.deleted && !advert.hidden">{{advert?.province.name}}, {{advert?.city.name}}</td>
+                        <td *ngIf="!advert.deleted && !advert.hidden">{{advert.price | currency:"R":"symbol":"1.2-2"}}</td>
+                    </tr>
+                    <tr *ngIf="!adverts">
+                        <td colspan="4" class="text-center">
+                            <span class="spinner-border spinner-border-lg align-center"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>  
+    </div>
+</div>

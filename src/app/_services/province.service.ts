@@ -20,17 +20,12 @@ export class ProvinceService {
                 catchError(this.handleError)
             );
     }
-    getProvinceById(provinceId: number): Observable<Province> {
+    getProvinceById(provinceId: number) {
         return this.http.get<Province>(`${environment.apiUrl}/provinces/${provinceId}`)
             .pipe(
                 catchError(this.handleError)
             );
-    }
-    getProvinceByName(provinceName: string): Observable<Province> {
-        return this.http.get<Province>(`${environment.apiUrl}/provinces/${provinceName}`)
-            .pipe(
-                catchError(this.handleError)
-            );
+    
     }
     getCitiesForProvince(provinceId: number): Observable<City[]> {
         return this.http.get<City[]>(`${environment.apiUrl}/provinces/${provinceId}/cities`)

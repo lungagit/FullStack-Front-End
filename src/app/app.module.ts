@@ -26,7 +26,8 @@ import { MdbTabsModule } from 'mdb-angular-ui-kit/tabs';
 import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HomeHeaderComponent } from './_shared/home-header/home-header.component';
+import { SharedModule } from './_shared/shared.module';
+
 
 @NgModule({
   declarations: [
@@ -34,11 +35,11 @@ import { HomeHeaderComponent } from './_shared/home-header/home-header.component
     HomeComponent,
     HomesForSaleComponent,
     ModalComponent,
-    HomeHeaderComponent,
 
-    
+  
   ],
   imports: [
+    SharedModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,

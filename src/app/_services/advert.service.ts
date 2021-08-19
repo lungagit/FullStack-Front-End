@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable, of, Subscription, throwError } from 'rxjs';
+import { catchError, first } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Advert } from '../_models/advert';
+import { Province } from '../_models/province';
+import { ProvinceService } from './province.service';
 
 
 @Injectable({
@@ -11,8 +13,8 @@ import { Advert } from '../_models/advert';
 })
 export class AdvertService {
 
-    constructor(private http: HttpClient) { }
-
+    constructor(private http: HttpClient){}
+    
     getAllAdvertsForUser(userId: number): Observable<Advert[]> {
         return this.http.get<Advert[]>(`${environment.apiUrl}/users/${userId}/adverts`)
             .pipe(
@@ -70,13 +72,13 @@ export class AdvertService {
         return{
             id: 0,
             headline: null,
-            province: null,
-            city: null,
+            provinceId: null,
+            cityId: null,
             advertDetails: null,
             price: null,
             status: 'LIVE',
             hidden: false,
-            deleted: false
+            deleted: false,
         };
     }
 }

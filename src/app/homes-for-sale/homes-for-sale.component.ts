@@ -14,7 +14,13 @@ export class HomesForSaleComponent implements OnInit {
   modalOpend: boolean = false;
   constructor(private router: Router,
               private authenticationService: AuthenticationService,
-              private modalService: MdbModalService) { }
+              private modalService: MdbModalService) {
+
+        // redirect to buy a house if already logged in
+        if (this.authenticationService.currentUserValue) { 
+            this.router.navigate(['/buy-a-house']);
+        }
+               }
 
   ngOnInit(): void {
   }

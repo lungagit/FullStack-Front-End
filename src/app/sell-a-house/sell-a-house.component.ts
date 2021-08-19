@@ -29,6 +29,7 @@ export class SellAHouseComponent implements OnInit, OnDestroy {
     error: string = '';
     advertId: number;
     userId: number;
+
     advertSub: Subscription;
     provincesSub: Subscription;
     provinceSub: Subscription;
@@ -37,7 +38,6 @@ export class SellAHouseComponent implements OnInit, OnDestroy {
     provinces: Province[] = [];
     province: Province; 
     cities: City[] = [];
-    advertCity: City;
     city: City;
     advert: Advert;
 
@@ -76,9 +76,9 @@ export class SellAHouseComponent implements OnInit, OnDestroy {
             },
             price: {
               required: 'Price is required.',
-              min: 'Price must be at least 10000.',
+              min: 'Price must be at least R10000.',
               pattern: 'Invalid price',
-              max: 'Price cannot exceed 100000000.',
+              max: 'Price cannot exceed R100000000.',
             },
         };
         // Define an instance of the validator for use with this form,
@@ -136,8 +136,6 @@ export class SellAHouseComponent implements OnInit, OnDestroy {
         debounceTime(700)
       ).subscribe(value => {
         this.displayMessage = this.genericValidator.processMessages(this.createAdvertForm);
-
-
       });
     }
     
@@ -146,6 +144,7 @@ export class SellAHouseComponent implements OnInit, OnDestroy {
         .pipe(first())
         .subscribe({
           next: (advert: Advert) =>  {
+
             this.displayAdvert(advert);
           },
           error: err => this.error = err
@@ -157,20 +156,19 @@ export class SellAHouseComponent implements OnInit, OnDestroy {
       this.advert = advert;
 
       if (this.advert.id === 0) {
-        this.title = 'Add Advert';
+        this.title = 'Add a Listing';
         
       } else {
-        this.title = `Edit Advert: ${this.advert.headline}`;
-        //Update the data on the form
-        this.province = this.provinces.find(prov => prov.name === this.advert.province);
+        this.title = `Edit Listing: ${this.advert.headline}`;
+        //Populate form with advert values
+        this.province = this.provinces.find(prov => prov.id === this.advert.provinceId);
         
-        this.citiesSub = this.provinceService.getCitiesForProvince(this.province.id)
+        this.citiesSub = this.provinceService.getCitiesForProvince(this.advert.provinceId)
                   .pipe(first())
                   .subscribe({
                     next: cities => {
                       this.cities = cities
-                      this.city = this.cities.find(city => city.name === this.advert.city);
-                      console.log("Advert City: ", this.city)
+                      this.city = this.cities.find(city => city.id === this.advert.id);
                       this.createAdvertForm.patchValue({
 
                             headline: this.advert.headline,
@@ -209,15 +207,15 @@ export class SellAHouseComponent implements OnInit, OnDestroy {
       
       this.advert = {
           headline: this.createAdvertForm.get('headline')?.value,
-          province: this.province.name,
-          city: this.city.name,
+          provinceId: this.province.id,
+          cityId: this.city.id,
           advertDetails: this.createAdvertForm.get('advertDetails')?.value,
           price: this.createAdvertForm.get('price')?.value,
           status: this.advert.status,
           hidden: this.advert.hidden,
           deleted: this.advert.deleted,
       }
-
+      console.log(this.advert);
       this.loading = true;
       this.advertService.createAdvert(this.userId, this.advert)
               .pipe(first())
@@ -225,6 +223,7 @@ export class SellAHouseComponent implements OnInit, OnDestroy {
                   data => {
                     this.alertService.success('Advert published successfully', { keepAfterRouteChange: true });
                     this.router.navigate(['/my-adverts']);
+                    this.advert.province = this.province;
                   },
                   error => {
 
@@ -236,13 +235,13 @@ export class SellAHouseComponent implements OnInit, OnDestroy {
       private updateAdvert(): void {
 
         this.advert.headline = this.createAdvertForm.get('headline')?.value;
-        this.advert.province = this.province.name,
-        this.advert.city = this.city.name,
+        this.advert.provinceId = this.province.id;
+        this.advert.cityId = this.city.id,
         this.advert.advertDetails = this.createAdvertForm.get('advertDetails')?.value;
         this.advert.price = this.createAdvertForm.get('price')?.value;
 
         this.loading = true;
-        this.advertService.updateAdvert(this.userId,this.advertId, this.advert)
+        this.advertService.updateAdvert(this.userId, this.advertId, this.advert)
             .pipe(first())
             .subscribe(
                 data => {
@@ -259,15 +258,6 @@ export class SellAHouseComponent implements OnInit, OnDestroy {
         this.province = province;
 
         if (!this.advert) return;
-        // else if (!this.advert || this.advert.id === 0){
-        //   this.citiesSub = this.provinceService.getCitiesForProvince(this.province.id)
-        //         .pipe(first())
-        //         .subscribe({
-        //           next: cities => {
-        //             this.cities = cities
-        //           }
-        //         });
-        //}
         else{
           this.citiesSub = this.provinceService.getCitiesForProvince(this.province.id)
                 .pipe(first())
@@ -276,8 +266,6 @@ export class SellAHouseComponent implements OnInit, OnDestroy {
                     this.cities = cities
                   }
                 });
-        
-
         }
       
     }

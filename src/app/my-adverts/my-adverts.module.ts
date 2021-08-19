@@ -1,13 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
 import { MyAdvertsComponent } from './my-adverts.component'
-import { HeaderComponent } from '../header/header.component';
 import { AuthGuard } from '../_helpers/auth.guard';
-import { FooterComponent } from '../footer/footer.component';
 import { AuthHeaderComponent } from '../_shared/auth-header/auth-header.component';
 import { SellAHouseComponent } from '../sell-a-house/sell-a-house.component';
 import { BuyAHouseComponent } from '../buy-a-house/buy-a-house.component';
@@ -27,6 +24,7 @@ import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { DeleteModalComponent } from '../_shared/delete-modal/delete-modal.component';
 import { AlertComponent } from '../_shared/alert/alert.component';
+import { SharedModule } from '../_shared/shared.module';
 
 
 @NgModule({
@@ -34,8 +32,6 @@ import { AlertComponent } from '../_shared/alert/alert.component';
     LoginComponent,
     RegisterComponent,
     MyAdvertsComponent,
-    HeaderComponent,
-    FooterComponent,
     AuthHeaderComponent,
     SellAHouseComponent,
     BuyAHouseComponent,
@@ -44,7 +40,7 @@ import { AlertComponent } from '../_shared/alert/alert.component';
 
   ],
   imports: [
-    CommonModule,
+    SharedModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild([
