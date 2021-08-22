@@ -25,6 +25,8 @@ import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { DeleteModalComponent } from '../_shared/delete-modal/delete-modal.component';
 import { AlertComponent } from '../_shared/alert/alert.component';
 import { SharedModule } from '../_shared/shared.module';
+import { ManageMyAccountComponent } from '../manage-my-account/manage-my-account.component';
+import { SellerProfileComponent } from '../seller-profile/seller-profile.component';
 
 
 @NgModule({
@@ -36,7 +38,9 @@ import { SharedModule } from '../_shared/shared.module';
     SellAHouseComponent,
     BuyAHouseComponent,
     DeleteModalComponent,
-    AlertComponent
+    AlertComponent,
+    SellerProfileComponent,
+    ManageMyAccountComponent
 
   ],
   imports: [
@@ -50,6 +54,8 @@ import { SharedModule } from '../_shared/shared.module';
       {path: 'sell-a-house', component: SellAHouseComponent, canActivate: [AuthGuard]},
       {path: 'sell-a-house/:id/edit', component: SellAHouseComponent, canActivate: [AuthGuard]},
       {path: 'buy-a-house', component: BuyAHouseComponent, canActivate: [AuthGuard]},
+      {path: 'manage-my-account', component: ManageMyAccountComponent, canActivate: [AuthGuard]},
+      {path: 'seller-profile', component: SellerProfileComponent, canActivate: [AuthGuard]}
 
     ]),
     MdbCarouselModule,

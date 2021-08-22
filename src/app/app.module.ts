@@ -28,15 +28,12 @@ import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './_shared/shared.module';
 
-
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     HomesForSaleComponent,
     ModalComponent,
-
-  
   ],
   imports: [
     SharedModule,

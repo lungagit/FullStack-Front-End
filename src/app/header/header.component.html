@@ -12,7 +12,9 @@
                    [routerLink]="['/my-adverts']">
                     <i class="fas fa-chart-bar fa-fw me-3"></i><span>My Adverts</span>
                 </a>
-                <a class="list-group-item list-group-item-action py-2 ripple">
+                <a class="list-group-item list-group-item-action py-2 ripple"
+                   routerLinkActive="active"
+                   [routerLink]="['/seller-profile']">
                     <i class="fas fa-user fa-fw me-3"></i><span>My Profile</span></a> 
                 <a class="list-group-item list-group-item-action py-2 ripple" 
                    routerLinkActive="active" 
@@ -24,12 +26,10 @@
                     <i class="fas fa-briefcase fa-fw me-3"></i><span>Sell a House</span>
                 </a>
                 <a class="list-group-item list-group-item-action py-2 ripple"
-                   routerLinkActive="active">
+                   routerLinkActive="active"
+                   [routerLink]="['/manage-my-account']">
                     <i class="fas fa-wrench fa-fw me-3"></i><span>Manage Account</span></a>
-
-                <a class="list-group-item list-group-item-action py-2 ripple"
-                   routerLinkActive="active">
-                    <i class="fas fa-id-card fa-fw me-3"></i><span>My Seller Profile</span></a>                        
+                        
                 <a class="list-group-item list-group-item-action py-2 ripple"
                    routerLinkActive="active">
                     <i class="fas fa-star fa-fw me-3"></i><span>Favorite Houses</span></a>
@@ -75,7 +75,7 @@
 
             <!-- Right links -->
             <ul class="navbar-nav ms-auto d-flex flex-row">
-                <a class="navbar-brand" >
+                <a class="navbar-brand" [routerLink]="['/seller-profile']">
                     <strong>{{username}}</strong>
                 </a>
                 <!-- Notification dropdown -->

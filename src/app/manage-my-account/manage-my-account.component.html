@@ -1,0 +1,154 @@
+<app-header></app-header>
+<main style="margin-top: 58px">
+        <div class="col-md-6 offset-md-3 mt-5 pt-4">
+            <app-alert></app-alert>
+            <div class="card">
+                <h4 class="card-header" style="text-align: center;">Manage Account</h4>
+                <div class="card-body" *ngIf="!passwordComfirmed">
+                    <form [formGroup]="currentPassForm" 
+                          (ngSubmit)="onContinue()"
+                          novalidate>                  
+                        <!-- Password input -->
+                        <div class="form-floating mb-4">
+                            <input type="password" 
+                                   id="currentPassword" 
+                                   name="currentPassword" 
+                                   placeholder="Current Password" 
+                                   class="form-control"
+                                   formControlName="currentPassword" 
+                                   [ngClass]="{'is-invalid': currentPassForm.get('currentPassword').errors && submitted}" />
+                            <label class="form-label" for="currentPassword">Current Password</label>
+                            <span>
+                                <span class="small">
+                                    <small> Enter your password to continue</small>
+                                </span>
+                            </span>
+                            <div class="alert alert-danger" *ngIf="passwordInValid">
+                                Password is incorrect
+                            </div>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary btn-block">
+                                Continue
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-body" *ngIf="passwordComfirmed">
+                    <form novalidate 
+                          (ngSubmit)="onUpdate()"
+                          [formGroup]="manageUserForm">
+                        <!-- Fornames -->
+                        <div class="form-floating mb-4">
+                            <input type="text"
+                                   id="forenames" 
+                                   name="forenames"
+                                   placeholder="Forenames" 
+                                   class="form-control"
+                                   formControlName="forenames" 
+                                   [ngClass]="{'is-invalid': displayMessage.forenames }"/>
+                            <label class="form-label" for="forenames">Forenames</label>
+                            <span>
+                                <span class="small">
+                                    <small> Min 1 characters, max 100 characters</small>
+                                </span>
+                            </span>
+                        </div>
+            
+                        <!-- Surname -->
+                        <div class="form-floating mb-4">
+                            <input type="text"
+                                   id="surname" 
+                                   name="surname" 
+                                   placeholder="Surname" 
+                                   class="form-control"
+                                   formControlName="surname" 
+                                   [ngClass]="{'is-invalid': displayMessage.surname }" />
+                            <label class="form-label" for="email">Surname</label>
+                            <span>
+                                <span class="small">
+                                    <small> Min 3 characters, max 100 characters</small>
+                                </span>
+                            </span>
+                        </div>
+            
+                        <!-- Email input -->
+                        <div class="form-floating mb-4">
+                            <input type="email"
+                                   id="email"
+                                   name="email" 
+                                   placeholder="name@example.com" 
+                                   class="form-control"
+                                   formControlName="email" 
+                                   [ngClass]="{'is-invalid': displayMessage.email }"/>
+                            <label class="form-label" for="email">New Email address</label>
+                            <span>
+                                <span class="small">
+                                    <small> Min 6 characters, max 100 characters, eg: name@example.com</small>
+                                </span>
+                            </span>
+                        </div>
+            
+                        <!-- Password Group input -->
+                        <div formGroupName="passwordGroup">
+                            <span>
+                                <span class="small" style="text-align: center;">
+                                    <strong>NOTE: </strong><small>Leave password field blank to keep the same password </small>
+                                    
+                                </span>
+                            </span>
+                            <!-- Password input -->
+                            <div class="form-floating mb-4">
+                                <input type="password" 
+                                       id="password" 
+                                       name="password" 
+                                       placeholder="password" 
+                                       class="form-control"
+                                       formControlName="password" 
+                                       [ngClass]="{'is-invalid': displayMessage.password }" />
+                                <label class="form-label" for="password">New Password</label>
+                                <span>
+                                    <span class="small">
+                                        <small> Min 8 characters, max 100 characters</small>
+                                    </span>
+                                </span>
+                            </div>
+            
+                            <!-- Confirm Password input -->
+                            <div class="form-floating mb-4">
+                                <input type="password" 
+                                       id="confirmPassword" 
+                                       name="password" 
+                                       placeholder="password"
+                                       class="form-control" 
+                                       formControlName="confirmPassword" 
+                                       [ngClass]="{'is-invalid': manageUserForm.get('passwordGroup')?.errors||
+                                                                                  displayMessage.confirmPassword}" />
+                                <label class="form-label" for="confirmPassword">Confirm New Password</label>
+                                <span>
+                                    <span class="small">
+                                        <small> Should match the first password</small>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+            
+                        <div class="alert alert-danger" *ngIf="invalid">
+                            Fill in all fields
+                        </div>
+
+                        <!-- Submit button -->
+                        <button type="submit" [disabled]="loading" class="btn btn-primary btn-block">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                            Save changes
+                        </button>
+                        <button type="button" class="btn btn-danger btn-block" [routerLink]="['/my-adverts']">
+                            Cancel
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <!-- </div> -->
+</main>
+
