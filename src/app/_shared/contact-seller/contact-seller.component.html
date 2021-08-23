@@ -1,0 +1,119 @@
+<div class="col-md-8 offset-md-2 mt-5">
+    
+    <div class="card mb-3">
+        <h4 class="card-title" style="text-align: center;"><strong>Seller Information</strong></h4>
+        <div class="card-body">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(20).jpg" alt="..." class="img-fluid"/>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{user?.forenames}} {{user?.surname}}</h5>
+                        <p class="card-text">
+                            {{user?.email}}
+                        </p>
+                        <p class="card-text">
+                            {{user?.phoneNumber}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="card mb-3">
+        <h4 class="card-title" style="text-align: center;"> <strong>Send a message</strong></h4>
+        <div class="card-body">
+            <app-alert></app-alert>
+            <form [formGroup]="contactSellerForm"
+                  (ngSubmit)="onSendMessage()" 
+                  novalidate>
+
+                <!-- Name input -->
+                <div class="form-floating mb-4">
+                    <input type="text"
+                        id="name" 
+                        class="form-control" 
+                        name="name"
+                        formControlName="name"
+                        placeholder="Your Name" 
+                        [ngClass]="{'is-invalid': displayMessage.name}"/>
+                        
+                    <label class="form-label" for="name">Your Name</label>
+                    <span>
+                        <span class="small">
+                            <small>Required, min 5 characters, max 100 characters</small>
+                        </span>
+                    </span>
+                </div>
+            
+                <!-- Email input -->
+                <div class="form-floating mb-4">
+                    <input type="email" 
+                        id="email" 
+                        class="form-control" 
+                        formControlName="email"
+                        placeholder="Your Email"
+                        [ngClass]="{'is-invalid': displayMessage.email}" />
+                    <label class="form-label" for="email">Your Email address</label>
+                    <span>
+                        <span class="small">
+                            <small>Required min 6 characters, max 100 characters, eg name@example.com</small>
+                        </span>
+                    </span>
+                </div>
+            
+                <!-- Name input -->
+                <div class="form-floating mb-4">
+                    <input type="text" 
+                        id="phoneNumber" 
+                        class="form-control" 
+                        name="phoneNumber"
+                        formControlName="phoneNumber" 
+                        placeholder="Your Phone Number" 
+                        [ngClass]="{'is-invalid': displayMessage.phoneNumber}"/>
+                    <label class="form-label" for="phoneNumber">Your Phone Number</label>
+                    <span>
+                        <span class="small">
+                            <small>Not required, max 100 digits</small>
+                        </span>
+                    </span>
+                </div>
+            
+                <!-- Message input -->
+                <div class="form-fixed mb-4">
+                    <textarea class="form-control"
+                            type="text" 
+                            id="message" 
+                            name="message"
+                            formControlName="message" 
+                            rows="4"
+                            placeholder="Message"
+                            [ngClass]="{'is-invalid': displayMessage.message}"></textarea>
+                    <label class="form-label" for="message"></label>
+                    <span>
+                        <span class="small">
+                            <small>Required: min 10 characters, max 2000 characters</small>
+                        </span>
+                    </span>
+                </div>
+            
+                <!-- Checkbox -->
+                <div class="form-check d-flex justify-content-center mb-4">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="form4Example4" checked />
+                    <label class="form-check-label" for="form4Example4">
+                        Send me a copy of this message
+                    </label>
+                </div>
+                <div class="alert alert-danger" *ngIf="invalid">
+                    Fill in all required fields!
+                </div>
+            
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block mb-4">Send</button>
+            </form>
+        </div>
+    </div>
+</div>

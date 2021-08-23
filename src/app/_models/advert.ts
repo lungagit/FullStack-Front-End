@@ -13,4 +13,5 @@ export class Advert{
     hidden: boolean;
     deleted: boolean;
     advertDetails: string;
+    userId?: number;
 }

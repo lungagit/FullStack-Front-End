@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, timer } from 'rxjs';
 import { first } from 'rxjs/operators';
+import { User } from 'src/app/_models';
 import { Advert } from 'src/app/_models/advert';
 import { City } from 'src/app/_models/city';
 import { Province } from 'src/app/_models/province';
-import { AuthenticationService } from 'src/app/_services';
+import { AuthenticationService, UserService } from 'src/app/_services';
 import { AdvertService } from 'src/app/_services/advert.service';
 import { ProvinceService } from 'src/app/_services/province.service';
 
@@ -15,6 +16,7 @@ import { ProvinceService } from 'src/app/_services/province.service';
   styleUrls: ['./advert-details.component.scss']
 })
 export class AdvertDetailsComponent implements OnInit {
+    user: User;
     errorMessage = '';
     advert: Advert | undefined;
     advertId: number;
@@ -31,7 +33,8 @@ export class AdvertDetailsComponent implements OnInit {
     constructor(private route: ActivatedRoute,
                 private authenticationService: AuthenticationService,
                 private advertService: AdvertService,
-                private provinceService: ProvinceService) {
+                private provinceService: ProvinceService,
+                private userService: UserService) {
       this.userId = 0;
       if (this.authenticationService.currentUserValue) { 
             this.authenticated = true;
@@ -66,7 +69,7 @@ export class AdvertDetailsComponent implements OnInit {
             this.getAdvert(this.advertId)
           }
           if(!this.advert){
-            return
+            return;
           }
     }
     
@@ -85,10 +88,21 @@ export class AdvertDetailsComponent implements OnInit {
             this.advert = advert;
             this.advert.province = this.provinces.find(prov => prov.id === this.advert.provinceId);
             this.advert.city = this.cities.find(city => city.id === this.advert.cityId);
+            console.log("Advert: ",this.advert);
+            this.getSeller(this.advert.userId);
           },
           error: err => this.errorMessage = err
         });
       }); 
+    }
+
+    getSeller(sellerId: number): void{
+      this.userService.getUserById(sellerId)
+          .pipe(first())
+          .subscribe( user => {
+            this.user = user;
+            console.log("Seller: ",this.user);
+      });
     }
 
     ngOnDestroy(): void {

@@ -23,7 +23,6 @@ import { MdbTabsModule } from 'mdb-angular-ui-kit/tabs';
 import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { DeleteModalComponent } from '../_shared/delete-modal/delete-modal.component';
-import { AlertComponent } from '../_shared/alert/alert.component';
 import { SharedModule } from '../_shared/shared.module';
 import { ManageMyAccountComponent } from '../manage-my-account/manage-my-account.component';
 import { SellerProfileComponent } from '../seller-profile/seller-profile.component';
@@ -38,7 +37,6 @@ import { SellerProfileComponent } from '../seller-profile/seller-profile.compone
     SellAHouseComponent,
     BuyAHouseComponent,
     DeleteModalComponent,
-    AlertComponent,
     SellerProfileComponent,
     ManageMyAccountComponent
 

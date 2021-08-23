@@ -215,7 +215,6 @@ export class SellAHouseComponent implements OnInit, OnDestroy {
           hidden: this.advert.hidden,
           deleted: this.advert.deleted,
       }
-      console.log(this.advert);
       this.loading = true;
       this.advertService.createAdvert(this.userId, this.advert)
               .pipe(first())

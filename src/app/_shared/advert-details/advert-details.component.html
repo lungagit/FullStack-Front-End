@@ -35,15 +35,12 @@
                 <div class="card-body">
                     <button class="btn btn-primary" type="button" (click)="basicCollapse.toggle()" aria-expanded="false"
                         aria-controls="collapseExample">
-                        Contact Agent
+                        Contact Seller
                     </button>
     
                     <!--Collapsed content-->
                     <div class="mt-3" id="collapseExample" mdbCollapse #basicCollapse="mdbCollapse">
-                        <h5 class="card-title"> <strong>Coming Soon</strong></h5>
-                        <P class="card-text">
-                            Will be implemented in Section 5
-                        </P>
+                        <app-contact-seller [user]="user"></app-contact-seller>
                     </div>
                 </div>
             </div>
@@ -83,10 +80,7 @@
     
                 <!--Collapsed content-->
                 <div class="mt-3" id="collapseExample" mdbCollapse #basicCollapse="mdbCollapse">
-                    <h5 class="card-title"> <strong>Coming Soon</strong></h5>
-                    <P class="card-text">
-                        Will be implemented in Section 5
-                    </P>
+                    <app-contact-seller [user]="user"></app-contact-seller>
                 </div>
             </div>
         </div>

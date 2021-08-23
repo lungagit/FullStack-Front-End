@@ -8,6 +8,9 @@ import { FooterComponent } from '../footer/footer.component';
 import { HomeHeaderComponent } from './home-header/home-header.component';
 import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
 import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
+import { ContactSellerComponent } from './contact-seller/contact-seller.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -16,9 +19,12 @@ import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
     AdvertDetailsComponent,
     FooterComponent,
     HomeHeaderComponent,
+    ContactSellerComponent,
+    AlertComponent
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       {path: 'buy-a-house/:id', component: AdvertDetailsComponent}
     ]),
@@ -31,6 +37,8 @@ import { MdbDropdownModule } from 'mdb-angular-ui-kit/dropdown';
     CommonModule,
     FooterComponent,
     HomeHeaderComponent,
+    ContactSellerComponent,
+    AlertComponent
   ]
 })
 export class SharedModule { }
